@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.learningnavigation.databinding.FragmentGalleryBinding
+import com.example.learningnavigation.ui.Custom1Fragment
 
 class GalleryFragment : Fragment() {
 
@@ -22,16 +23,19 @@ class GalleryFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val galleryViewModel =
-            ViewModelProvider(this).get(GalleryViewModel::class.java)
+
 
         _binding = FragmentGalleryBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textGallery
-        galleryViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        textView.text = "This is the Gallery Fragment"
+
+        // to receive information from a bundle, use the built in variable arguments
+
+        val message = arguments?.getString(Custom1Fragment.BUNDLE_GALLERY_INFO) ?: ""
+        textView.text = "This is the Gallery Fragment\n$message"
+
         return root
     }
 
